@@ -1,13 +1,5 @@
-requires 'Date::Utility';
 requires 'List::Util';
 requires 'Scalar::Util';
-requires 'Math::Business::BlackScholes::Binaries';
-requires 'Math::Business::BlackScholes::Binaries::Greeks::Delta';
-requires 'Math::Business::BlackScholes::Binaries::Greeks::Vega';
-requires 'Math::Function::Interpolator';
-requires 'Machine::Epsilon';
-requires 'Storable';
-requires 'YAML::XS';
 requires 'perl', '5.014000';
 
 
@@ -21,4 +13,5 @@ on test => sub {
     requires 'Test::More';
     requires 'Test::Most';
     requires 'Test::Perl::Critic';
+    requires 'Format::Util::Numbers';
 };
