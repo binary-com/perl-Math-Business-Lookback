@@ -136,7 +136,7 @@ sub lbfixedput {
 sub lbhighlow {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
-    my $value = LBFLOATCALL($S, $S_min, $t, $r_q, $mu, $sigma, $S_max, $S_min) + LBFLOATPUT($S, $S_max, $t, $r_q, $mu, $sigma, $S_max, $S_min);
+    my $value = lbfloatcall($S, $S_min, $t, $r_q, $mu, $sigma, $S_min) + lbfloatput($S, $S_max, $t, $r_q, $mu, $sigma, $S_max);
 
     return $value;
 }
