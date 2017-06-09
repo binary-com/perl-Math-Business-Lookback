@@ -18,7 +18,7 @@ Math::Business::LookBacks
 
     use Math::Business::LookBacks;
 
-    # price of a Call option
+    # price of a Lookback Fixed Call option
 
     my $price_lbfixedcall_option = Math::Business::LookBacks::lbfixedcall(
         1.35,       # stock price
@@ -27,6 +27,7 @@ Math::Business::LookBacks
         0.002,      # payout currency interest rate (0.05 = 5%)
         0.001,      # quanto drift adjustment (0.05 = 5%)
         0.11,       # volatility (0.3 = 30%)
+        1.39        # maximum spot 
     );
 
 =head1 DESCRIPTION
@@ -38,7 +39,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 =head2 lbfloatcall
 
     USAGE
-    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma)
+    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_min)
 
     DESCRIPTION
     Price of a Lookback Float Call
@@ -59,7 +60,7 @@ sub lbfloatcall {
 =head2 lbfloatput
 
     USAGE
-    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma)
+    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max)
 
     DESCRIPTION
     Price of a Lookback Float Put
@@ -80,7 +81,7 @@ sub lbfloatput {    # Floating Strike Put
 =head2 lbfixedcall
 
     USAGE
-    my $price = lbfixedcall($S, $K, $t, $r_q, $mu, $sigma)
+    my $price = lbfixedcall($S, $K, $t, $r_q, $mu, $sigma, $S_max)
 
     DESCRIPTION
     Price of a Lookback Fixed Call
@@ -103,7 +104,7 @@ sub lbfixedcall {
 =head2 lbfixedput
 
     USAGE
-    my $price = lbfixedput($S, $K, $t, $r_q, $mu, $sigma)
+    my $price = lbfixedput($S, $K, $t, $r_q, $mu, $sigma, $S_min)
 
     DESCRIPTION
     Price of a Lookback Fixed Put
@@ -126,7 +127,7 @@ sub lbfixedput {
 =head2 lbhighlow
 
     USAGE
-    my $price = lbhighlow($S, $K, $t, $r_q, $mu, $sigma)
+    my $price = lbhighlow($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback High Low
