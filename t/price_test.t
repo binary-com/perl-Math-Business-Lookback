@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More;
+use Test::Most;
 use Test::Warn;
 use Test::Exception;
 use Math::Business::LookBacks;

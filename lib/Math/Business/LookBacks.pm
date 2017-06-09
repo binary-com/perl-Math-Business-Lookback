@@ -41,7 +41,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
     my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma)
 
     DESCRIPTION
-    Price of a Lookback Float Call
+    Price of a Lookback Float Call. 
 
 =cut
 
@@ -172,7 +172,7 @@ sub dnorm {    # Standard normal density function
 
 =head2 l_max
 
-to be added...
+This is a common function use to calculate the lookbacks options price. See [1] for details.
 
 =cut
 
@@ -197,7 +197,7 @@ sub l_max {
 
 =head2 l_min
 
-to be added...
+This is a common function use to calculate the lookbacks options price. See [1] for details.
 
 =cut
 
@@ -223,7 +223,6 @@ sub l_min {
 =head1 DEPENDENCIES
 
     * Math::CDF
-    * Machine::Epsilon
 
 =head1 SOURCE CODE
 
@@ -231,7 +230,8 @@ sub l_min {
 
 =head1 REFERENCES
 
-[1] ...
+[1] Espen Gaarder Haug, PhD
+    The Complete Guide to Option Pricing Formulas p141-p144
 
 =head1 AUTHOR
 

@@ -19,5 +19,6 @@ on test => sub {
     requires 'Test::Exception';
     requires 'Test::FailWarnings';
     requires 'Test::More';
+    requires 'Test::Most';
     requires 'Test::Perl::Critic';
 };
