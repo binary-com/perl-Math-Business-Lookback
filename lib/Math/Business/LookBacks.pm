@@ -46,7 +46,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 =cut
 
 sub lbfloatcall {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
 
     my $d1 = d1_function($S, $S_min, $t, $r_q, $mu, $sigma);
     my $d2 = $d1 - ($sigma * sqrt($t));
@@ -66,8 +66,8 @@ sub lbfloatcall {
 
 =cut
 
-sub lbfloatput {     # Floating Strike Put
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
+sub lbfloatput {    # Floating Strike Put
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
 
     my $d1 = d1_function($S, $S_max, $t, $r_q, $mu, $sigma);
     my $d2 = $d1 - ($sigma * sqrt($t));
@@ -87,8 +87,8 @@ sub lbfloatput {     # Floating Strike Put
 
 =cut
 
-sub lbfixedcall {    
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
+sub lbfixedcall {
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
 
     my $K_max = max($S_max, $K);
     my $d1 = d1_function($S, $K_max, $t, $r_q, $mu, $sigma);
@@ -110,8 +110,8 @@ sub lbfixedcall {
 
 =cut
 
-sub lbfixedput {    
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
+sub lbfixedput {
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
 
     my $K_min = min($S_min, $K);
     my $d1 = d1_function($S, $K_min, $t, $r_q, $mu, $sigma);
@@ -133,7 +133,7 @@ sub lbfixedput {
 
 =cut
 
-sub lbhighlow {    
+sub lbhighlow {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
     my $value = LBFLOATCALL($S, $S_min, $t, $r_q, $mu, $sigma, $S_max, $S_min) + LBFLOATPUT($S, $S_max, $t, $r_q, $mu, $sigma, $S_max, $S_min);
@@ -147,7 +147,7 @@ returns the d1 term common to many BlackScholes formulae.
 
 =cut
 
-sub d1_function {    
+sub d1_function {
     my ($S, $K, $t, $r_q, $mu, $sigma) = @_;
 
     my $value = (log($S / $K) + ($mu + $sigma * $sigma * 0.5) * $t) / ($sigma * sqrt($t));
@@ -161,7 +161,7 @@ Standard normal density function
 
 =cut
 
-sub dnorm {          # Standard normal density function
+sub dnorm {    # Standard normal density function
     my $x  = shift;
     my $pi = 3.14159265359;
 
@@ -176,7 +176,7 @@ to be added...
 
 =cut
 
-sub l_max {      
+sub l_max {
     my ($S, $K, $t, $r_q, $mu, $sigma) = @_;
 
     my $d1 = d1_function($S, $K, $t, $r_q, $mu, $sigma);
@@ -201,7 +201,7 @@ to be added...
 
 =cut
 
-sub l_min {    
+sub l_min {
     my ($S, $K, $t, $r_q, $mu, $sigma) = @_;
 
     my $d1 = d1_function($S, $K, $t, $r_q, $mu, $sigma);
