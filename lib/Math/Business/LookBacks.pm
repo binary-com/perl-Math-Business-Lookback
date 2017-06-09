@@ -41,7 +41,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
     my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma)
 
     DESCRIPTION
-    Price of a Lookback Float Call. 
+    Price of a Lookback Float Call
 
 =cut
 
