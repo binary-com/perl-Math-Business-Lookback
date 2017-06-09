@@ -27,7 +27,7 @@ Math::Business::LookBacks
         0.002,      # payout currency interest rate (0.05 = 5%)
         0.001,      # quanto drift adjustment (0.05 = 5%)
         0.11,       # volatility (0.3 = 30%)
-        1.39        # maximum spot 
+        1.39        # maximum spot
     );
 
 =head1 DESCRIPTION
