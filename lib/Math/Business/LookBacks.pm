@@ -8,6 +8,8 @@ use Math::CDF qw(pnorm);
 
 # ABSTRACT: The Black-Scholes formula for Lookbacks options.
 
+our $VERSION = '0.01';
+
 =head1 NAME
 
 Math::Business::LookBacks
