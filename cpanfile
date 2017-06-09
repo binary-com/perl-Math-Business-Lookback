@@ -1,7 +1,7 @@
 requires 'List::Util';
 requires 'Scalar::Util';
 requires 'perl', '5.014000';
-
+requires 'Math::CDF';
 
 on configure => sub {
     requires 'ExtUtils::MakeMaker';
