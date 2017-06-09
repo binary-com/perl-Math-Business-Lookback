@@ -1,0 +1,26 @@
+language: perl
+sudo: required
+perl:
+    - "5.14"
+matrix:
+    fast_finish: true
+env:
+    CODECOV_TOKEN: 49470ce5-1a8e-48b1-aa3c-196af4761f4b
+services:
+    - redis-server
+cache: apt
+before_install:
+    - git clone https://d4a95fecbf54180e8fd6ad876e49b62083f3fb62@github.com/regentmarkets/travis-scripts /tmp/travis-scripts-init
+    - /tmp/travis-scripts-init/clone_branch.sh regentmarkets/travis-scripts
+    - /tmp/travis-scripts-init/clone_branch.sh regentmarkets/cpan
+    - . /tmp/travis-scripts/setup_perl5lib.sh
+    - /tmp/travis-scripts/setup_ssh.sh
+    - sudo mkdir -p /etc/rmg;
+    - /tmp/travis-scripts/redis.sh
+install:
+    - /tmp/travis-scripts/devbox.sh *.yml
+
+script:
+     - dzil smoke --release --author && dzil cover -test -report codecov && dzil xtest
+after_script:
+    - /tmp/travis-scripts/wait_for_ssh.sh
