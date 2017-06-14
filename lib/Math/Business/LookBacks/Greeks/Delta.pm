@@ -85,7 +85,7 @@ sub _l_max_delta {
 
     if ($mu == 0) {
         $l_max_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm($b1);
-        $l_max_delta = $l_max_delta + exp(-$r_q * $t) * pnorm($a1) * (log($S / $S_max) + 1 + (0.5 * ($sigma ^ 2) * $t));
+        $l_max_delta = $l_max_delta + exp(-$r_q * $t) * pnorm($b1) * (log($S / $S_max) + 1 + (0.5 * ($sigma ^ 2) * $t));
     } else {
         $l_max_delta =
             1 + 0.5 * $sigma ^ 2 * exp(-$r_q * $t) * ($S / $S_max) ^ (-2 * $mu / ($sigma ^ 2)) * pnorm($b1 - (2 * $mu * sqrt($t)) / $sigma);
