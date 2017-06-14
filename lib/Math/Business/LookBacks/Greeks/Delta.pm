@@ -39,7 +39,7 @@ sub _l_min_delta {
     } else {
         $l_min_delta = (exp(($mu - $r_q) * $t) * 0.5 * $sigma ^ 2 * pnorm(-$a1)) / $mu;
         $l_min_delta = $l_min_delta - 1 +
-            0.5 * $sigma ^ 2 * exp(-$r_q * t) * ($S / $S_min) ^ (-2 * $mu / ($sigma ^ 2)) * pnorm(-$a1 + (2 * $mu * sqrt($t)) / $sigma);
+            0.5 * $sigma ^ 2 * exp(-$r_q * $t) * ($S / $S_min) ^ (-2 * $mu / ($sigma ^ 2)) * pnorm(-$a1 + (2 * $mu * sqrt($t)) / $sigma);
     }
 
     return $l_min_delta;
