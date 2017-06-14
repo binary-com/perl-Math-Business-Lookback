@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::::Greeks::Volga;
+package Math::Business::LookBacks::Greeks::Volga;
 use strict;
 use warnings;
 

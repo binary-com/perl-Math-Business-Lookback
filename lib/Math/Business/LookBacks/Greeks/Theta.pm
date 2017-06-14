@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::::Greeks::Theta;
+package Math::Business::LookBacks::Greeks::Theta;
 use strict;
 use warnings;
 

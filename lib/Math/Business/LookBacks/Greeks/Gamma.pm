@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::::Greeks::Gamma;
+package Math::Business::LookBacks::Greeks::Gamma;
 use strict;
 use warnings;
 
