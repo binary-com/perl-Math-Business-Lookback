@@ -31,7 +31,7 @@ sub _l_min_delta {
     my $a1 = (log($S / $S_min) + ($mu + 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
     my $a2 = (log($S / $S_min) + ($mu - 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
 
-    my $L_min_delta;
+    my $l_min_delta;
 
     if ($mu == 0) {
         $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm($a1);
