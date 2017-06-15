@@ -5,7 +5,7 @@ use warnings;
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
-our $VERSION = '0.01';
+## VERSION
 
 =head2 lbfixedcall
 
