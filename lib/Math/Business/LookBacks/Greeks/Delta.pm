@@ -5,6 +5,8 @@ use warnings;
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
+our $VERSION = '0.01';
+
 =head2 lbfixedcall
 
 Delta of a Lookback Fixed Call
@@ -111,7 +113,6 @@ sub _l_min_delta {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
 
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_min);
-    my $a2 = _a2($S, $K, $t, $r_q, $mu, $sigma, $S_min);
 
     my $l_min_delta;
 
@@ -131,7 +132,6 @@ sub _l_max_delta {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
 
     my $b1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_max);
-    my $b2 = _a2($S, $K, $t, $r_q, $mu, $sigma, $S_max);
 
     my $l_max_delta;
 

@@ -5,6 +5,8 @@ use warnings;
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
+our $VERSION = '0.01';
+
 =head2 lbfixedcall
 
 Theta of a Lookback Fixed Call
