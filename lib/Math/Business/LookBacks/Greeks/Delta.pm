@@ -12,7 +12,15 @@ Delta of a Lookback Fixed Call
 =cut
 
 sub lbfixedcall {
-    return 0.0;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
+
+    my $delta;
+
+    my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
+
+    $delta = exp(($mu - $r_q) * $t) * pnorm($a1) - _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
+
+    return $delta;
 }
 
 =head2 lbfixedput
@@ -22,7 +30,15 @@ Delta of a Lookback Fixed Put
 =cut
 
 sub lbfixedput {
-    return 0.0;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
+
+    my $delta;
+
+    my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
+
+    $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) - _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
+
+    return $delta;
 }
 
 =head2 lbfloatcall
@@ -32,7 +48,15 @@ Delta of a Lookback Float Call
 =cut
 
 sub lbfloatcall {
-    return 0.0;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
+
+    my $delta;
+
+    my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_min);
+
+    $delta = exp(($mu - $r_q) * $t) * pnorm($a1) - _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, $S_min);
+
+    return $delta;
 }
 
 =head2 lbfloatput
@@ -42,7 +66,15 @@ Delta of a Lookback Float Put
 =cut
 
 sub lbfloatput {
-    return 0.0;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
+
+    my $delta;
+
+    my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_max);
+
+    $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) - _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, $S_max);
+
+    return $delta;
 }
 
 =head2 lbhighlow
@@ -52,14 +84,34 @@ Delta of a Lookback HighLow
 =cut
 
 sub lbhighlow {
-    return 0.0;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
+
+    my $delta = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_min) + lbfloatput($S, $K, $t, $r_q, $mu, $sigma, $S_max);
+
+    return $delta;
+}
+
+sub _a1 {
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min_or_max) = @_;
+
+    my $a1 = (log($S / $S_min_or_max) + ($mu + 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
+
+    return $a1;
+}
+
+sub _a2 {
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min_or_max) = @_;
+
+    my $a2 = (log($S / $S_min_or_max) + ($mu - 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
+
+    return $a2;
 }
 
 sub _l_min_delta {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
 
-    my $a1 = (log($S / $S_min) + ($mu + 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
-    my $a2 = (log($S / $S_min) + ($mu - 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
+    my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_min);
+    my $a2 = _a2($S, $K, $t, $r_q, $mu, $sigma, $S_min);
 
     my $l_min_delta;
 
@@ -78,8 +130,8 @@ sub _l_min_delta {
 sub _l_max_delta {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
 
-    my $b1 = (log($S / $S_max) + ($mu + 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
-    my $b2 = (log($S / $S_max) + ($mu - 0.5 * ($sigma ^ 2)) * $t) / ($sigma * sqrt($t));
+    my $b1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_max);
+    my $b2 = _a2($S, $K, $t, $r_q, $mu, $sigma, $S_max);
 
     my $l_max_delta;
 
