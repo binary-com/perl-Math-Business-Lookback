@@ -47,8 +47,9 @@ Prices lookbacks options using the GBM model, all closed formulas.
 =cut
 
 sub lbfloatcall {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
+    $S_max = undef;
     my $d1 = d1_function($S, $S_min, $t, $r_q, $mu, $sigma);
     my $d2 = $d1 - ($sigma * sqrt($t));
 
@@ -68,8 +69,9 @@ sub lbfloatcall {
 =cut
 
 sub lbfloatput {    # Floating Strike Put
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
+    $S_min = undef;
     my $d1 = d1_function($S, $S_max, $t, $r_q, $mu, $sigma);
     my $d2 = $d1 - ($sigma * sqrt($t));
 
@@ -89,8 +91,9 @@ sub lbfloatput {    # Floating Strike Put
 =cut
 
 sub lbfixedcall {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
+    $S_min = undef;
     my $K_max = max($S_max, $K);
     my $d1 = d1_function($S, $K_max, $t, $r_q, $mu, $sigma);
     my $d2 = $d1 - ($sigma * sqrt($t));
@@ -112,8 +115,9 @@ sub lbfixedcall {
 =cut
 
 sub lbfixedput {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
+    $S_max = undef;
     my $K_min = min($S_min, $K);
     my $d1 = d1_function($S, $K_min, $t, $r_q, $mu, $sigma);
     my $d2 = $d1 - ($sigma * sqrt($t));
@@ -137,7 +141,7 @@ sub lbfixedput {
 sub lbhighlow {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
-    my $value = lbfloatcall($S, $S_min, $t, $r_q, $mu, $sigma, $S_min) + lbfloatput($S, $S_max, $t, $r_q, $mu, $sigma, $S_max);
+    my $value = lbfloatcall($S, $S_min, $t, $r_q, $mu, $sigma, $S_max, $S_min) + lbfloatput($S, $S_max, $t, $r_q, $mu, $sigma, $S_max, $S_min);
 
     return $value;
 }

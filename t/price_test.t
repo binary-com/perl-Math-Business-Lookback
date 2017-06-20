@@ -105,13 +105,7 @@ sub test_price {
 
     my $func = \&$formula;
 
-    if (defined $s_max and defined $s_min) {
-        $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_max, $s_min);
-    } elsif (defined $s_max and not defined $s_min) {
-        $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_max);
-    } else {
-        $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_min);
-    }
+    $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_max, $s_min);
 
     is roundnear(0.00001, $price), roundnear(0.00001, $expected), "correct price for " . $type;
 }
