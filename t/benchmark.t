@@ -107,7 +107,7 @@ sub test_greek {
 
     $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_max, $s_min);
 
-    is roundnear(0.00001, $price), roundnear(0.00001, $expected), "correct price for " . $type;
+    is roundnear(0.00001, $price), roundnear(0.00001, $expected), "correct delta for " . $type;
 }
 
 done_testing;
