@@ -14,4 +14,5 @@ on test => sub {
     requires 'Test::Most';
     requires 'Test::Perl::Critic';
     requires 'Format::Util::Numbers';
+    requires 'Text::CSV::Slurp';
 };
