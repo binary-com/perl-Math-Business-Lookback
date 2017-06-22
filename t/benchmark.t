@@ -27,18 +27,32 @@ subtest 'benchmark' => sub {
         my $bbg_price = $line->{bbg_price};
         my $bbg_delta = $line->{bbg_delta};
 
-        test_price({    
+        test_price({
                 type          => $type,
                 strike        => $strike,
                 spot          => $spot,
                 discount_rate => $r_q,
-                t             => $duration/365,
+                t             => $duration / 365,
                 mu            => $mu,
                 vol           => $vol,
                 spot_max      => $s_max,
                 spot_min      => $s_min
             },
             $bbg_price
+        );
+
+        test_greek({
+                type          => $type,
+                strike        => $strike,
+                spot          => $spot,
+                discount_rate => $r_q,
+                t             => $duration / 365,
+                mu            => $mu,
+                vol           => $vol,
+                spot_max      => $s_max,
+                spot_min      => $s_min
+            },
+            $bbg_delta
         );
     }
 };
