@@ -15,6 +15,7 @@ my $pricing_parameters = Text::CSV::Slurp->load(file => 't/pricing_params.csv');
 subtest 'benchmark' => sub {
     #spot,strike,duration,r_q,mu,vol,s_max,s_min,bbg_price,bbg_delta
     foreach my $line (@$pricing_parameters) {
+        my $type      = $line->{type};
         my $spot      = $line->{spot};
         my $strike    = $line->{strike};
         my $duration  = $line->{duration};
@@ -25,6 +26,20 @@ subtest 'benchmark' => sub {
         my $s_min     = $line->{s_min};
         my $bbg_price = $line->{bbg_price};
         my $bbg_delta = $line->{bbg_delta};
+
+        test_price({    
+                type          => $type,
+                strike        => $strike,
+                spot          => $spot,
+                discount_rate => $r_q,
+                t             => $duration/365,
+                mu            => $mu,
+                vol           => $vol,
+                spot_max      => $s_max,
+                spot_min      => $s_min
+            },
+            3.5007
+        );
     }
 };
 
