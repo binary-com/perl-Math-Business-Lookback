@@ -14,10 +14,11 @@ Delta of a Lookback Fixed Call
 =cut
 
 sub lbfixedcall {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
     my $delta;
 
+    $S_min = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
 
     $delta = exp(($mu - $r_q) * $t) * pnorm($a1) - _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
@@ -32,10 +33,11 @@ Delta of a Lookback Fixed Put
 =cut
 
 sub lbfixedput {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
     my $delta;
 
+    $S_max = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
 
     $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) - _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
@@ -50,10 +52,11 @@ Delta of a Lookback Float Call
 =cut
 
 sub lbfloatcall {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
     my $delta;
 
+    $S_max = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_min);
 
     $delta = exp(($mu - $r_q) * $t) * pnorm($a1) - _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, $S_min);
@@ -68,10 +71,11 @@ Delta of a Lookback Float Put
 =cut
 
 sub lbfloatput {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max) = @_;
+    my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
     my $delta;
 
+    $S_min = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_max);
 
     $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) - _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, $S_max);
@@ -88,7 +92,7 @@ Delta of a Lookback HighLow
 sub lbhighlow {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) = @_;
 
-    my $delta = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_min) + lbfloatput($S, $K, $t, $r_q, $mu, $sigma, $S_max);
+    my $delta = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min) + lbfloatput($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min);
 
     return $delta;
 }

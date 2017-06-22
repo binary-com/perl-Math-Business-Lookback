@@ -38,7 +38,7 @@ subtest 'benchmark' => sub {
                 spot_max      => $s_max,
                 spot_min      => $s_min
             },
-            3.5007
+            $bbg_price
         );
     }
 };
