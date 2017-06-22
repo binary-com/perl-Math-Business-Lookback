@@ -7,6 +7,7 @@ use Test::Most;
 use Test::Warn;
 use Test::Exception;
 use Math::Business::LookBacks;
+use Math::Business::LookBacks::Greeks::Delta;
 use Format::Util::Numbers qw(roundnear);
 use Text::CSV::Slurp;
 
