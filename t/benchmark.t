@@ -82,7 +82,9 @@ sub test_price {
 
     $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_max, $s_min);
 
-    is roundnear(0.00001, $price), roundnear(0.00001, $expected), "correct price for " . $type;
+    my $diff = abs($price - $expected) / $expected;
+
+    cmp_ok($diff, '<', 0.08, 'Diff is within permissible range');
 }
 
 sub test_greek {
@@ -107,7 +109,8 @@ sub test_greek {
 
     $price = $func->($spot, $strike, $t, $discount_rate, $mu, $sigma, $s_max, $s_min);
 
-    is roundnear(0.00001, $price), roundnear(0.00001, $expected), "correct delta for " . $type;
+    my $diff = abs($price - $expected) / $expected;
+    cmp_ok($diff, '<', 0.12, 'Diff is within permissible range');
 }
 
 done_testing;
