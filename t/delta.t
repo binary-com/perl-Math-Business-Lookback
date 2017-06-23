@@ -22,7 +22,7 @@ subtest 'test_delta' => sub {
             spot_max      => 102,
             spot_min      => undef
         },
-        0.98981
+        0.82097
     );
 
     test_greek({    # Fixed strike lookback put
@@ -36,7 +36,7 @@ subtest 'test_delta' => sub {
             spot_max      => undef,
             spot_min      => 95
         },
-        -2
+        -0.0154
     );
 
     test_greek({    # Floating strike lookback call
@@ -50,7 +50,7 @@ subtest 'test_delta' => sub {
             spot_max      => undef,
             spot_min      => 95
         },
-        -1.00995
+        0.97465
     );
 
     test_greek({    # Floating strike lookback put
@@ -64,7 +64,7 @@ subtest 'test_delta' => sub {
             spot_max      => 105,
             spot_min      => undef
         },
-        -0.00506
+        -0.58939
     );
 
     test_greek({    # High low lookback
@@ -78,7 +78,7 @@ subtest 'test_delta' => sub {
             spot_max      => 105,
             spot_min      => 95
         },
-        -1.01501
+        0.38527
     );
 
 };
