@@ -53,7 +53,7 @@ subtest 'benchmark' => sub {
                 spot_max      => $s_max,
                 spot_min      => $s_min
             },
-            $bbg_delta
+            $bbg_delta * 0.01
         );
     }
 };

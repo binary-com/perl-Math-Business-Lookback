@@ -21,7 +21,7 @@ sub lbfixedcall {
     $S_min = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
 
-    $delta = exp(($mu - $r_q) * $t) * pnorm($a1) - _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
+    $delta = exp(($mu - $r_q) * $t) * pnorm($a1) + _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, max($S_max, $K));
 
     return $delta;
 }
@@ -40,7 +40,7 @@ sub lbfixedput {
     $S_max = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
 
-    $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) - _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
+    $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) + _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, min($S_min, $K));
 
     return $delta;
 }
@@ -59,7 +59,7 @@ sub lbfloatcall {
     $S_max = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_min);
 
-    $delta = exp(($mu - $r_q) * $t) * pnorm($a1) - _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, $S_min);
+    $delta = exp(($mu - $r_q) * $t) * pnorm($a1) + _l_min_delta($S, $K, $t, $r_q, $mu, $sigma, $S_min);
 
     return $delta;
 }
@@ -78,7 +78,7 @@ sub lbfloatput {
     $S_min = undef;
     my $a1 = _a1($S, $K, $t, $r_q, $mu, $sigma, $S_max);
 
-    $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) - _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, $S_max);
+    $delta = -exp(($mu - $r_q) * $t) * pnorm(-$a1) + _l_max_delta($S, $K, $t, $r_q, $mu, $sigma, $S_max);
 
     return $delta;
 }
@@ -121,12 +121,16 @@ sub _l_min_delta {
     my $l_min_delta;
 
     if ($mu == 0) {
-        $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm(-$a1);
-        $l_min_delta = $l_min_delta + exp(-$r_q * $t) * (pnorm($a1) - 1) * (log($S / $S_min) + 1 + (0.5 * ($sigma**2) * $t));
+        $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm($a1);
+        $l_min_delta = $l_min_delta + exp(-$r_q * $t) * (pnorm($a1) - 1) * (log($S / $S_min) + 1 + ($mu * $t) + (0.5 * ($sigma**2) * $t));
     } else {
-        $l_min_delta = (exp(($mu - $r_q) * $t) * 0.5 * $sigma**2 * pnorm(-$a1)) / $mu;
-        $l_min_delta = $l_min_delta - 1 +
-            0.5 * ($sigma**2) * exp(-$r_q * $t) * ($S / $S_min)**(-2 * $mu / ($sigma**2)) * pnorm(-$a1 + (2 * $mu * sqrt($t)) / $sigma);
+        $l_min_delta = (exp(($mu - $r_q) * $t) * 0.5 * ($sigma**2) * pnorm(-$a1)) / $mu;
+        $l_min_delta =
+            $l_min_delta +
+            (-1 + 0.5 * ($sigma**2) / $mu) *
+            exp(-$r_q * $t) *
+            (($S / $S_min)**(-2 * $mu / ($sigma**2))) *
+            pnorm(-$a1 + (2 * $mu * sqrt($t)) / $sigma);
     }
 
     return $l_min_delta;
@@ -141,10 +145,11 @@ sub _l_max_delta {
 
     if ($mu == 0) {
         $l_max_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm($b1);
-        $l_max_delta = $l_max_delta + exp(-$r_q * $t) * pnorm($b1) * (log($S / $S_max) + 1 + (0.5 * ($sigma**2) * $t));
+        $l_max_delta = $l_max_delta + exp(-$r_q * $t) * pnorm($b1) * (log($S / $S_max) + 1 + ($mu * $t) + (0.5 * ($sigma**2) * $t));
     } else {
-        $l_max_delta =
-            1 + 0.5 * $sigma**2 * exp(-$r_q * $t) * ($S / $S_max) ^ (-2 * $mu / ($sigma**2)) * pnorm($b1 - (2 * $mu * sqrt($t)) / $sigma);
+        $l_max_delta = (exp(($mu - $r_q) * $t) * 0.5 * ($sigma**2) * pnorm($b1)) / $mu;
+        $l_max_delta = $l_max_delta +
+            (1 - 0.5 * ($sigma**2) / $mu) * exp(-$r_q * $t) * (($S / $S_max)**(-2 * $mu / ($sigma**2))) * pnorm($b1 - (2 * $mu * sqrt($t)) / $sigma);
     }
 
     return $l_max_delta;
