@@ -107,14 +107,6 @@ sub _a1 {
     return $a1;
 }
 
-sub _a2 {
-    my ($S, $K, $t, $r_q, $mu, $sigma, $S_min_or_max) = @_;
-
-    my $a2 = (log($S / $S_min_or_max) + ($mu - 0.5 * ($sigma**2)) * $t) / ($sigma * sqrt($t));
-
-    return $a2;
-}
-
 sub _l_min_delta {
     my ($S, $K, $t, $r_q, $mu, $sigma, $S_min) = @_;
 
