@@ -6,6 +6,8 @@ use warnings;
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
+use Math::Business::LookBacks::Common;
+
 # ABSTRACT: The Black-Scholes formula for Lookbacks options.
 
 our $VERSION = '0.01';
@@ -27,7 +29,8 @@ Math::Business::LookBacks
         0.002,      # payout currency interest rate (0.05 = 5%)
         0.001,      # quanto drift adjustment (0.05 = 5%)
         0.11,       # volatility (0.3 = 30%)
-        1.39        # maximum spot
+        1.39,       # maximum spot
+        undef       # minimum spot
     );
 
 =head1 DESCRIPTION
@@ -39,7 +42,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 =head2 lbfloatcall
 
     USAGE
-    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_min)
+    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Float Call
@@ -61,7 +64,7 @@ sub lbfloatcall {
 =head2 lbfloatput
 
     USAGE
-    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max)
+    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Float Put
@@ -83,7 +86,7 @@ sub lbfloatput {    # Floating Strike Put
 =head2 lbfixedcall
 
     USAGE
-    my $price = lbfixedcall($S, $K, $t, $r_q, $mu, $sigma, $S_max)
+    my $price = lbfixedcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Fixed Call
@@ -107,7 +110,7 @@ sub lbfixedcall {
 =head2 lbfixedput
 
     USAGE
-    my $price = lbfixedput($S, $K, $t, $r_q, $mu, $sigma, $S_min)
+    my $price = lbfixedput($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Fixed Put
@@ -160,21 +163,6 @@ sub d1_function {
     return $value;
 }
 
-=head2 dnorm
-
-Standard normal density function
-
-=cut
-
-sub dnorm {    # Standard normal density function
-    my $x  = shift;
-    my $pi = 3.14159265359;
-
-    my $value = exp(-$x**2 / 2) / sqrt(2.0 * $pi);
-
-    return $value;
-}
-
 =head2 l_max
 
 This is a common function use to calculate the lookbacks options price. See [1] for details.
@@ -194,7 +182,7 @@ sub l_max {
             (2.0 * $mu) *
             (-($S / $K)**(-2.0 * $mu / ($sigma**2)) * pnorm($d1 - 2.0 * $mu / $sigma * sqrt($t)) + exp($mu * $t) * pnorm($d1));
     } else {
-        $value = $S * ($sigma * sqrt($t)) * (dnorm($d1) + $d1 * pnorm($d1));
+        $value = $S * ($sigma * sqrt($t)) * (Math::Business::LookBacks::Common::dnorm($d1) + $d1 * pnorm($d1));
     }
 
     return $value;
@@ -219,7 +207,7 @@ sub l_min {
             (2.0 * $mu) *
             (($S / $K)**(-2.0 * $mu / ($sigma**2)) * pnorm(-$d1 + 2.0 * $mu / $sigma * sqrt($t)) - exp($mu * $t) * pnorm(-$d1));
     } else {
-        $value = $S * ($sigma * sqrt($t)) * (dnorm($d1) + $d1 * (pnorm($d1) - 1));
+        $value = $S * ($sigma * sqrt($t)) * (Math::Business::LookBacks::Common::dnorm($d1) + $d1 * (pnorm($d1) - 1));
     }
 
     return $value;

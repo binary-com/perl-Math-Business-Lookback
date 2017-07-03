@@ -15,7 +15,8 @@ Math::Business::LookBacks
         0.002,      # payout currency interest rate (0.05 = 5%)
         0.001,      # quanto drift adjustment (0.05 = 5%)
         0.11,       # volatility (0.3 = 30%)
-        1.39        # maximum spot 
+        1.39,       # maximum spot
+        undef       # minimum spot
     );
 
 # DESCRIPTION
@@ -27,7 +28,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 ## lbfloatcall
 
     USAGE
-    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_min)
+    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Float Call
@@ -35,7 +36,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 ## lbfloatput
 
     USAGE
-    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max)
+    my $price = lbfloatcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Float Put
@@ -43,7 +44,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 ## lbfixedcall
 
     USAGE
-    my $price = lbfixedcall($S, $K, $t, $r_q, $mu, $sigma, $S_max)
+    my $price = lbfixedcall($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Fixed Call
@@ -51,7 +52,7 @@ Prices lookbacks options using the GBM model, all closed formulas.
 ## lbfixedput
 
     USAGE
-    my $price = lbfixedput($S, $K, $t, $r_q, $mu, $sigma, $S_min)
+    my $price = lbfixedput($S, $K, $t, $r_q, $mu, $sigma, $S_max, $S_min)
 
     DESCRIPTION
     Price of a Lookback Fixed Put

@@ -5,6 +5,8 @@ use warnings;
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
+use Math::Business::LookBacks::Common;
+
 ## VERSION
 
 =head2 lbfixedcall
@@ -121,7 +123,7 @@ sub _l_min_delta {
     my $l_min_delta;
 
     if ($mu == 0) {
-        $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm($a1);
+        $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * Math::Business::LookBacks::Common::dnorm($a1);
         $l_min_delta = $l_min_delta + exp(-$r_q * $t) * (pnorm($a1) - 1) * (log($S / $S_min) + 1 + ($mu * $t) + (0.5 * ($sigma**2) * $t));
     } else {
         $l_min_delta = (exp(($mu - $r_q) * $t) * 0.5 * ($sigma**2) * pnorm(-$a1)) / $mu;
@@ -144,7 +146,7 @@ sub _l_max_delta {
     my $l_max_delta;
 
     if ($mu == 0) {
-        $l_max_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * dnorm($b1);
+        $l_max_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * Math::Business::LookBacks::Common::dnorm($b1);
         $l_max_delta = $l_max_delta + exp(-$r_q * $t) * pnorm($b1) * (log($S / $S_max) + 1 + ($mu * $t) + (0.5 * ($sigma**2) * $t));
     } else {
         $l_max_delta = (exp(($mu - $r_q) * $t) * 0.5 * ($sigma**2) * pnorm($b1)) / $mu;
@@ -153,21 +155,6 @@ sub _l_max_delta {
     }
 
     return $l_max_delta;
-}
-
-=head2 dnorm
-
-Standard normal density function
-
-=cut
-
-sub dnorm {    # Standard normal density function
-    my $x  = shift;
-    my $pi = 3.14159265359;
-
-    my $value = exp(-$x**2 / 2) / sqrt(2.0 * $pi);
-
-    return $value;
 }
 
 1;
