@@ -23,6 +23,8 @@ Math::Business::LookBacks
 
 Prices lookbacks options using the GBM model, all closed formulas.
 
+See also: https://en.wikipedia.org/wiki/Lookback_option
+
 # SUBROUTINES
 
 ## lbfloatcall
@@ -68,10 +70,6 @@ Prices lookbacks options using the GBM model, all closed formulas.
 ## d1\_function
 
 returns the d1 term common to many BlackScholes formulae.
-
-## dnorm
-
-Standard normal density function
 
 ## l\_max
 
