@@ -9,7 +9,7 @@ on configure => sub {
 
 on test => sub {
     requires 'Test::Exception';
-    requires 'Test::FailWarnings';
+    requires 'Test::Warnings';
     requires 'Test::More';
     requires 'Test::Most';
     requires 'Test::Perl::Critic';

@@ -4,8 +4,9 @@ use strict;
 use warnings;
 
 use Test::Most;
-use Test::Warn;
+use Test::Warnings;
 use Test::Exception;
+
 use Math::Business::LookBacks;
 use Math::Business::LookBacks::Greeks::Delta;
 use Format::Util::Numbers qw(roundnear);
