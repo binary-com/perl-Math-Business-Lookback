@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::Greeks::Vega;
+package Math::Business::Lookback::Greeks::Theta;
 use strict;
 use warnings;
 
@@ -9,7 +9,7 @@ use Math::CDF qw(pnorm);
 
 =head2 lbfixedcall
 
-Vega of a Lookback Fixed Call
+Theta of a Lookback Fixed Call
 
 =cut
 
@@ -19,7 +19,7 @@ sub lbfixedcall {
 
 =head2 lbfixedput
 
-Vega of a Lookback Fixed Put
+Theta of a Lookback Fixed Put
 
 =cut
 
@@ -29,7 +29,7 @@ sub lbfixedput {
 
 =head2 lbfloatcall
 
-Vega of a Lookback Float Call
+Theta of a Lookback Float Call
 
 =cut
 
@@ -39,7 +39,7 @@ sub lbfloatcall {
 
 =head2 lbfloatput
 
-Vega of a Lookback Float Put
+Theta of a Lookback Float Put
 
 =cut
 
@@ -49,7 +49,7 @@ sub lbfloatput {
 
 =head2 lbhighlow
 
-Vega of a Lookback High Low
+Theta of a Lookback High Low
 
 =cut
 

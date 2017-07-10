@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::Greeks::Volga;
+package Math::Business::Lookback::Greeks::Gamma;
 use strict;
 use warnings;
 
@@ -9,7 +9,7 @@ use Math::CDF qw(pnorm);
 
 =head2 lbfixedcall
 
-Volga of a Lookback Fixed Call
+Gamma of a Lookback Fixed Call
 
 =cut
 
@@ -19,7 +19,7 @@ sub lbfixedcall {
 
 =head2 lbfixedput
 
-Volga of a Lookback Fixed Put
+Gamma of a Lookback Fixed Put
 
 =cut
 
@@ -29,7 +29,7 @@ sub lbfixedput {
 
 =head2 lbfloatcall
 
-Volga of a Lookback Float Call
+Gamma of a Lookback Float Call
 
 =cut
 
@@ -39,7 +39,7 @@ sub lbfloatcall {
 
 =head2 lbfloatput
 
-Volga of a Lookback Float Put
+Gamma of a Lookback Float Put
 
 =cut
 
@@ -49,7 +49,7 @@ sub lbfloatput {
 
 =head2 lbhighlow
 
-Volga of a Lookback High Low
+Gamma of a Lookback High Low
 
 =cut
 

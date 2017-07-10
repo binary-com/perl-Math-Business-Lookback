@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::Common;
+package Math::Business::Lookback::Common;
 
 use strict;
 use warnings;

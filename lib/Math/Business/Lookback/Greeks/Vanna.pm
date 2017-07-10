@@ -1,4 +1,4 @@
-package Math::Business::LookBacks::Greeks::Vanna;
+package Math::Business::Lookback::Greeks::Vanna;
 use strict;
 use warnings;
 

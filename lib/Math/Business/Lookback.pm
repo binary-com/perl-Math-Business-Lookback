@@ -1,4 +1,4 @@
-package Math::Business::LookBacks;
+package Math::Business::Lookback;
 
 use strict;
 use warnings;
@@ -6,23 +6,23 @@ use warnings;
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
-use Math::Business::LookBacks::Common;
+use Math::Business::Lookback::Common;
 
-# ABSTRACT: The Black-Scholes formula for Lookbacks options.
+# ABSTRACT: The Black-Scholes formula for Lookback options.
 
 our $VERSION = '0.01';
 
 =head1 NAME
 
-Math::Business::LookBacks
+Math::Business::Lookback
 
 =head1 SYNOPSIS
 
-    use Math::Business::LookBacks;
+    use Math::Business::Lookback;
 
     # price of a Lookback Fixed Call option
 
-    my $price_lbfixedcall_option = Math::Business::LookBacks::lbfixedcall(
+    my $price_lbfixedcall_option = Math::Business::Lookback::lbfixedcall(
         1.35,       # stock price
         1.36,       # barrier
         (7/365),    # time
@@ -35,7 +35,7 @@ Math::Business::LookBacks
 
 =head1 DESCRIPTION
 
-Prices lookbacks options using the GBM model, all closed formulas.
+Prices lookback options using the GBM model, all closed formulas.
 
 =head1 SUBROUTINES
 
@@ -182,7 +182,7 @@ sub l_max {
             (2.0 * $mu) *
             (-($S / $K)**(-2.0 * $mu / ($sigma**2)) * pnorm($d1 - 2.0 * $mu / $sigma * sqrt($t)) + exp($mu * $t) * pnorm($d1));
     } else {
-        $value = $S * ($sigma * sqrt($t)) * (Math::Business::LookBacks::Common::dnorm($d1) + $d1 * pnorm($d1));
+        $value = $S * ($sigma * sqrt($t)) * (Math::Business::Lookback::Common::dnorm($d1) + $d1 * pnorm($d1));
     }
 
     return $value;
@@ -207,7 +207,7 @@ sub l_min {
             (2.0 * $mu) *
             (($S / $K)**(-2.0 * $mu / ($sigma**2)) * pnorm(-$d1 + 2.0 * $mu / $sigma * sqrt($t)) - exp($mu * $t) * pnorm(-$d1));
     } else {
-        $value = $S * ($sigma * sqrt($t)) * (Math::Business::LookBacks::Common::dnorm($d1) + $d1 * (pnorm($d1) - 1));
+        $value = $S * ($sigma * sqrt($t)) * (Math::Business::Lookback::Common::dnorm($d1) + $d1 * (pnorm($d1) - 1));
     }
 
     return $value;
@@ -219,7 +219,7 @@ sub l_min {
 
 =head1 SOURCE CODE
 
-    https://github.com/binary-com/perl-Math-Business-LookBacks
+    https://github.com/binary-com/perl-Math-Business-Lookback
 
 =head1 REFERENCES
 
@@ -238,7 +238,7 @@ C<bug-math-business-lookbacks at rt.cpan.org>, or through the web
 
 interface at
 
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-Business-LookBacks>.
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-Business-Lookback>.
 
 I will be notified, and then you'll automatically be notified of progress on
 
@@ -248,7 +248,7 @@ your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Math::Business::LookBacks
+    perldoc Math::Business::Lookback
 
 You can also look for information at:
 
@@ -256,19 +256,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-LookBacks>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/Math-Business-LookBacks>
+L<http://annocpan.org/dist/Math-Business-Lookback>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/Math-Business-LookBacks>
+L<http://cpanratings.perl.org/d/Math-Business-Lookback>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/Math-Business-LookBacks/>
+L<http://search.cpan.org/dist/Math-Business-Lookback/>
 
 =back
 

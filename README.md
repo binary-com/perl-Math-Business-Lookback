@@ -1,14 +1,14 @@
 # NAME
 
-Math::Business::LookBacks
+Math::Business::Lookback
 
 # SYNOPSIS
 
-    use Math::Business::LookBacks;
+    use Math::Business::Lookback;
 
     # price of a Lookback Fixed Call option
 
-    my $price_lbfixedcall_option = Math::Business::LookBacks::lbfixedcall(
+    my $price_lbfixedcall_option = Math::Business::Lookback::lbfixedcall(
         1.35,       # stock price
         1.36,       # barrier
         (7/365),    # time
@@ -21,9 +21,7 @@ Math::Business::LookBacks
 
 # DESCRIPTION
 
-Prices lookbacks options using the GBM model, all closed formulas.
-
-See also: https://en.wikipedia.org/wiki/Lookback_option
+Prices lookback options using the GBM model, all closed formulas.
 
 # SUBROUTINES
 
@@ -85,7 +83,7 @@ This is a common function use to calculate the lookbacks options price. See \[1\
 
 # SOURCE CODE
 
-    https://github.com/binary-com/perl-Math-Business-LookBacks
+    https://github.com/binary-com/perl-Math-Business-Lookback
 
 # REFERENCES
 
@@ -104,7 +102,7 @@ Please report any bugs or feature requests to
 
 interface at
 
-[http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-Business-LookBacks](http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-Business-LookBacks).
+[http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-Business-Lookback](http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math-Business-Lookback).
 
 I will be notified, and then you'll automatically be notified of progress on
 
@@ -114,22 +112,22 @@ your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Math::Business::LookBacks
+    perldoc Math::Business::Lookback
 
 You can also look for information at:
 
 - RT: CPAN's request tracker (report bugs here)
 
-[http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-LookBacks](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-LookBacks)
+[http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback)
 
 - AnnoCPAN: Annotated CPAN documentation
 
-[http://annocpan.org/dist/Math-Business-LookBacks](http://annocpan.org/dist/Math-Business-LookBacks)
+[http://annocpan.org/dist/Math-Business-Lookback](http://annocpan.org/dist/Math-Business-Lookback)
 
 - CPAN Ratings
 
-[http://cpanratings.perl.org/d/Math-Business-LookBacks](http://cpanratings.perl.org/d/Math-Business-LookBacks)
+[http://cpanratings.perl.org/d/Math-Business-Lookback](http://cpanratings.perl.org/d/Math-Business-Lookback)
 
 - Search CPAN
 
-[http://search.cpan.org/dist/Math-Business-LookBacks/](http://search.cpan.org/dist/Math-Business-LookBacks/)
+[http://search.cpan.org/dist/Math-Business-Lookback/](http://search.cpan.org/dist/Math-Business-Lookback/)

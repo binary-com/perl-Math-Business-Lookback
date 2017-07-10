@@ -1,11 +1,11 @@
-package Math::Business::LookBacks::Greeks::Delta;
+package Math::Business::Lookback::Greeks::Delta;
 use strict;
 use warnings;
 
 use List::Util qw(max min);
 use Math::CDF qw(pnorm);
 
-use Math::Business::LookBacks::Common;
+use Math::Business::Lookback::Common;
 
 ## VERSION
 
@@ -115,7 +115,7 @@ sub _l_min_delta {
     my $l_min_delta;
 
     if ($mu == 0) {
-        $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * Math::Business::LookBacks::Common::dnorm($a1);
+        $l_min_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * Math::Business::Lookback::Common::dnorm($a1);
         $l_min_delta = $l_min_delta + exp(-$r_q * $t) * (pnorm($a1) - 1) * (log($S / $S_min) + 1 + ($mu * $t) + (0.5 * ($sigma**2) * $t));
     } else {
         $l_min_delta = (exp(($mu - $r_q) * $t) * 0.5 * ($sigma**2) * pnorm(-$a1)) / $mu;
@@ -138,7 +138,7 @@ sub _l_max_delta {
     my $l_max_delta;
 
     if ($mu == 0) {
-        $l_max_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * Math::Business::LookBacks::Common::dnorm($b1);
+        $l_max_delta = exp(-$r_q * $t) * $sigma * sqrt($t) * Math::Business::Lookback::Common::dnorm($b1);
         $l_max_delta = $l_max_delta + exp(-$r_q * $t) * pnorm($b1) * (log($S / $S_max) + 1 + ($mu * $t) + (0.5 * ($sigma**2) * $t));
     } else {
         $l_max_delta = (exp(($mu - $r_q) * $t) * 0.5 * ($sigma**2) * pnorm($b1)) / $mu;

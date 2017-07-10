@@ -7,7 +7,7 @@ use Test::Most;
 use Test::Warnings;
 use Test::Exception;
 
-use Math::Business::LookBacks::Greeks::Delta;
+use Math::Business::Lookback::Greeks::Delta;
 use Format::Util::Numbers qw(roundnear);
 
 subtest 'test_delta' => sub {
@@ -102,7 +102,7 @@ sub test_greek {
 
     my $price;
 
-    my $formula = 'Math::Business::LookBacks::Greeks::Delta::' . $type;
+    my $formula = 'Math::Business::Lookback::Greeks::Delta::' . $type;
 
     my $func = \&$formula;
 
