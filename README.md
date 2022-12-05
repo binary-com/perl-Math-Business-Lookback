@@ -118,16 +118,16 @@ You can also look for information at:
 
 - RT: CPAN's request tracker (report bugs here)
 
-[http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback)
+    [http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Business-Lookback)
 
 - AnnoCPAN: Annotated CPAN documentation
 
-[http://annocpan.org/dist/Math-Business-Lookback](http://annocpan.org/dist/Math-Business-Lookback)
+    [http://annocpan.org/dist/Math-Business-Lookback](http://annocpan.org/dist/Math-Business-Lookback)
 
 - CPAN Ratings
 
-[http://cpanratings.perl.org/d/Math-Business-Lookback](http://cpanratings.perl.org/d/Math-Business-Lookback)
+    [http://cpanratings.perl.org/d/Math-Business-Lookback](http://cpanratings.perl.org/d/Math-Business-Lookback)
 
 - Search CPAN
 
-[http://search.cpan.org/dist/Math-Business-Lookback/](http://search.cpan.org/dist/Math-Business-Lookback/)
+    [http://search.cpan.org/dist/Math-Business-Lookback/](http://search.cpan.org/dist/Math-Business-Lookback/)

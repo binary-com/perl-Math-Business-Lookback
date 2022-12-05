@@ -10,7 +10,7 @@ use Math::Business::Lookback::Common;
 
 # ABSTRACT: The Black-Scholes formula for Lookback options.
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
